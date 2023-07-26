@@ -1,15 +1,26 @@
 import Banner from "@/components/Banner";
-import Footer from "@/components/Footer/Footer";
-import BottomHeader from "@/components/Header/BottomHeader";
-import Header from "@/components/Header/Header";
+import Products from "@/components/Products";
+import { ProductProps } from "../../type";
 
-export default function Home() {
+interface Props {
+  productData: ProductProps;
+}
+export default function Home({ productData }: Props) {
   return (
     <main>
       <div className=" max-w-screen-2xl mx-auto">
-        {" "}
         <Banner />
+        <div className=" relative md:-mt-20 lgl:-mt-32 xl:-mt-60 z-20  mb-10">
+          <Products productData={productData} />
+        </div>
       </div>
     </main>
   );
 }
+
+//server site rendaring data fatching
+export const getServerSideProps = async () => {
+  const res = await fetch("https://fakestoreapiserver.reactbd.com/tech");
+  const productData = await res.json();
+  return { props: { productData } };
+};

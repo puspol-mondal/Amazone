@@ -19,7 +19,7 @@ const Banner = () => {
         interval={3000}
       >
         <div>
-          <Image src={sliderImg_1} alt="sliderImage" />
+          <Image priority src={sliderImg_1} alt="sliderImage" />
         </div>
         <div>
           <Image src={sliderImg_2} alt="sliderImage" />
