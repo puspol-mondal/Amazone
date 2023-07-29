@@ -5,7 +5,14 @@ import { CiLocationOn } from "react-icons/ci";
 import { HiOutlineSearch } from "react-icons/hi";
 import { BiCaretDown } from "react-icons/bi";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { StoreProps } from "../../../type";
 const Header = () => {
+  const { productData, favoriteData } = useSelector(
+    (state: StoreProps) => state.next
+  );
+  console.log(favoriteData);
+
   return (
     <div className="w-full h-20 bg-amazone_blue text-lightText sticky top-0 z-50">
       <div className="h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4">
@@ -50,9 +57,15 @@ const Header = () => {
           </p>
         </div>
         {/**fevorite */}
-        <div className="text-xs text-gray-100 flex flex-col justify-center px-2 border border-transparent hover:border-white cursor-pointer h-[70%] duration-300">
+        <div className="text-xs text-gray-100 flex flex-col justify-center px-2 border border-transparent hover:border-white cursor-pointer h-[70%] duration-300 relative">
           <p>Marked</p>
           <p className=" text-white font-bold">& Favorite</p>
+
+          {favoriteData.length > 0 && (
+            <span className=" absolute right-2 top-2 h-4 w-4 border-[1px] border-gray-400 flex items-center justify-center text-xs text-amazone_yellow">
+              {favoriteData.length}
+            </span>
+          )}
         </div>
         {/**cart */}
         <Link
@@ -66,7 +79,7 @@ const Header = () => {
           />
           <p className=" text-xs text-white font-bold mt-3">Cart</p>
           <span className=" absolute text-amazone_yellow text-sm top-0 left-[20px] font-semibold">
-            0
+            {productData ? productData.length : 0}
           </span>
         </Link>
       </div>
